@@ -5,10 +5,8 @@ import os
 rows, cols = (10, 20)
 zone = [[' ']*20 for test in range (10)]
 
-# Create character
-charac = "☺"
-
 # Insert character
+charac = "☺"
 start_row, start_col = (5, 5)
 zone[start_row][start_col] = charac
 
@@ -23,31 +21,36 @@ def print_zone():
     print("╚" + "═" * (cols-1) + "╝")
 
 # Function for move character on array
-def move_character():
+def move_character(pos_row, pos_col):
     direction=input("Choose a direction between N(orth) S(outh), E(st) W(est) : ")
-    pos_row, pos_col = (5, 5)
-    position = zone[pos_row][pos_col]
+    zone[pos_row][pos_col] = ' '
     if direction == "N":
-        position =  zone[pos_row][pos_col + 1]
-        os.system('clear')
-        print_zone()
+        pos_row -= 1
+        if pos_row == -1:
+            pos_row = 8
     elif direction == "S":
-        position =  zone[pos_row][pos_col - 1]
-        os.system('clear')
-        print_zone()
+        pos_row += 1
+        if pos_row == 9:
+            pos_row = 0
     elif direction == "E":
-        position =  zone[pos_row + 1][pos_col]
-        os.system('clear')
-        print_zone()
+        pos_col += 1
+        if pos_col == 19:
+            pos_col = 0
     elif direction == "W":
-        position =  zone[pos_row - 1][pos_col]
-        os.system('clear')
-        print_zone()
-
+        pos_col -= 1
+        if pos_col == -1:
+            pos_col = 18
     else:
         print("Wrong direction, choose antoher")
+    zone[pos_row][pos_col] = charac
+    os.system('clear')
+    print_zone()
+    return pos_row, pos_col
 
 # Run program
 if __name__ == "__main__":
+    pos_row = start_row
+    pos_col = start_col
     print_zone()
-    move_character()
+    for i in range(1, 20):
+        pos_row, pos_col = move_character(pos_row, pos_col)
