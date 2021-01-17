@@ -20,6 +20,9 @@ def print_zone():
         print('║')
     print("╚" + "═" * (cols-1) + "╝")
 
+# Direction's error message
+wrong_dir = "Wrong direction, choose interview"
+
 # Function for move character on array
 def move_character(pos_row, pos_col):
     direction=input("Choose a direction between N(orth) S(outh), E(st) W(est) : ")
@@ -27,19 +30,19 @@ def move_character(pos_row, pos_col):
     if direction == "N":
         pos_row -= 1
         if pos_row == -1:
-            pos_row = 8
+            print(wrong_dir)
     elif direction == "S":
         pos_row += 1
         if pos_row == 9:
-            pos_row = 0
+            print(wrong_dir)
     elif direction == "E":
         pos_col += 1
         if pos_col == 19:
-            pos_col = 0
+            print(wrong_dir)
     elif direction == "W":
         pos_col -= 1
         if pos_col == -1:
-            pos_col = 18
+            print(wrong_dir)
     else:
         print("Wrong direction, choose antoher")
     zone[pos_row][pos_col] = charac
